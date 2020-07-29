@@ -1,18 +1,19 @@
-FROM debian:9
+FROM alpine:3.12.0
 
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 MAINTAINER Giannis Mouchakis <gmouchakis@iit.demokritos.gr>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      openjdk-8-jdk \
+RUN apk add --no-cache \
+      openjdk8 \
       net-tools \
       curl \
-      netcat \
+      bash \
       gnupg \
-      libsnappy-dev \
+      procps \
+      perl \
     && rm -rf /var/lib/apt/lists/*
-      
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/
 
 RUN curl -O https://dist.apache.org/repos/dist/release/hadoop/common/KEYS
 

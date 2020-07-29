@@ -46,4 +46,11 @@ ADD entrypoint.sh /entrypoint.sh
 
 RUN chmod a+x /entrypoint.sh
 
+RUN addgroup hadoop \
+      && adduser -D -s /bin/bash hadoop -G hadoop \
+      && adduser hadoop wheel \
+      && adduser hadoop users
+USER hadoop
+ENV USER=hadoop
+
 ENTRYPOINT ["/entrypoint.sh"]
